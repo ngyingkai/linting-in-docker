@@ -3,7 +3,8 @@
 
 function print_help {
   echo '
-This script / container does code linting for ******
+This script / container do linting for shell scripts using ShellCheck.
+This script will lint and will output a log file with the ShellCheck warnings/errors.
 
 Usage (as Docker container):
 ----------------------------
@@ -13,7 +14,7 @@ Usage (as script):
 ----------------------------
 code_linting.sh
 
-Hint: Run this script / container in a ******-* directory.
+Hint: Run this script / container in the root directory of your project.
 
 Options:
   -h           : print this help'
