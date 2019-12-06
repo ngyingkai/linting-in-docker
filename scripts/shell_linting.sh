@@ -8,7 +8,7 @@ This script will lint and will output a log file with the ShellCheck warnings/er
 
 Usage (as Docker container):
 ----------------------------
-docker run --rm -v $(pwd):/linting shell_lint:latest
+docker run --rm -v $(pwd):/linting yingkai96/shell_lint:latest
 
 Usage (as script):
 ----------------------------
