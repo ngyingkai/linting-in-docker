@@ -1,12 +1,14 @@
+# based on official shellcheck image
 FROM koalaman/shellcheck-alpine
 
+# install bash to run bash script
 RUN apk update && apk add bash
 
-# Copy linting script    
-COPY scripts/code_linting.sh /linting/scripts/
+# copy linting script
+COPY scripts/shell_linting.sh /usr/local/bin
 
-RUN chmod 777 /linting
-
+# directory to mount folder to lint
 WORKDIR /linting
 
-ENTRYPOINT [ "/linting/scripts/code_linting.sh" ]
+# script will run shell_linting.sh by default
+ENTRYPOINT [ "shell_linting.sh" ]

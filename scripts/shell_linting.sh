@@ -8,7 +8,7 @@ This script will lint and will output a log file with the ShellCheck warnings/er
 
 Usage (as Docker container):
 ----------------------------
-docker run --rm -v $(pwd):/linting -w /******/$(basename $(pwd)) ******
+docker run --rm -v $(pwd):/linting shell_lint:latest
 
 Usage (as script):
 ----------------------------
@@ -22,22 +22,19 @@ Options:
 
 function shell_linting {
   SHELLCHECK_LOG="shellcheck_${LOG_PREFIX}.log"
-  find . -not -path "./*******-dev-*/*" -not -path "./dist_src/*" -name '*.sh*' \
+  find . -name '*.sh' \
     -exec printf "%b\n" "\n#####################################################################\nChecking file {} \
     \n#####################################################################" \; \
     -exec shellcheck -x {} \; | tee -a "$SHELLCHECK_LOG"
 }
 
-while getopts "fhs" opt; do
+while getopts "h" opt; do
   case $opt in
-    s) SKIP_SHELLCHECK=1;;
-    f) SKIP_FLAKE8=1;;
     h) print_help; exit 0;;
     *) error "Invalid option: $opt"; print_help; exit 1;;
   esac
 done
 
 LOG_PREFIX="$(date +'%Y%m%d-%H%M%S')"
-if [[ $SKIP_SHELLCHECK -ne 1 ]]; then
-  shell_linting
-fi
+
+shell_linting
